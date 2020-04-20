@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="IngameSoundEdit_data" version="1.3.0" audacityversion="2.3.3" sel0="34.4993959184" sel1="34.4993959184" vpos="0" h="20.2763195335" zoom="97.7988138686" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="ARTIST" value="Saria"/>
+		<tag name="COMMENTS" value="Feito em MidiCity"/>
+		<tag name="TITLE" value="Ingame1"/>
+	</tags>
+	<wavetrack name="IngameSound1" isSelected="1" height="150" minimized="0" channel="2" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="1521423">
+				<waveblock start="0">
+					<simpleblockfile filename="e080886d.au" len="262144" min="-0.27662" max="0.327445" rms="0.074566"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="e0808a91.au" len="262144" min="-0.278692" max="0.299896" rms="0.071387"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="e0808e05.au" len="219803" min="-0.303135" max="0.251295" rms="0.073375"/>
+				</waveblock>
+				<waveblock start="744091">
+					<simpleblockfile filename="e080833f.au" len="219803" min="-0.285232" max="0.278365" rms="0.070987"/>
+				</waveblock>
+				<waveblock start="963894">
+					<simpleblockfile filename="e08080e9.au" len="205690" min="-0.303135" max="0.251295" rms="0.073724"/>
+				</waveblock>
+				<waveblock start="1169584">
+					<simpleblockfile filename="e0808815.au" len="205690" min="-0.303135" max="0.278365" rms="0.072615"/>
+				</waveblock>
+				<waveblock start="1375274">
+					<simpleblockfile filename="e0808e96.au" len="146149" min="-0.254719" max="0.24785" rms="0.065916"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

@@ -1,0 +1,17 @@
+{
+    "name": "TheScripts",
+    "references": [
+        "GUID:f5b2c2d82b3426a45be6d6c2e3bd48c5"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        ""
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
