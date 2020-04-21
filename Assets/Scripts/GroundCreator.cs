@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq; //Para Usar o Any, aprendido no código https://github.com/E-tutor-Pedro-Silva/2D-Level-Editor/blob/master/Assets/Scripts/Editor/LevelCreatorEditor.cs
 //using UnityEditor.AI; //Para NavmeshBuilder
 //Código refeito em 03/03/2020 com base no código Creator enviado pelo e-tutor. Atenção para raycast.
 //Código refeito novamente em 26/03/2020, aqui ajustamos o problema do raycast e retornamos o track em que ela toca para outro script
@@ -10,8 +9,8 @@ using System.Linq; //Para Usar o Any, aprendido no código https://github.com/E-
 public class GroundCreator : MonoBehaviour
 {
     //public int maxRenderedTracks = 9;
-    public int tracksBeforePlayer = 3; //Quantidade de tracks que terão atrás do player.
-    public float distanceForRendering; // Distância do player até o proximo track 
+    public int tracksBeforePlayer = 3; //Quantidade de tracks que terão atrás do player. Se for maior do que 4 considero como o caso de 50 tracks.
+    public float distanceForRendering; // Distância do player até o proximo track, deve-se colocar um valor menor do que 50 pois usamos object pooling
     public bool mushroombuild;
 
     //Module é um outro script que serve para nos ajudar dizendo a direção para onde os tracks vão, inclusive marcando o começo e o final do track.
@@ -39,15 +38,26 @@ public class GroundCreator : MonoBehaviour
         for (int i = tracks.Count; i < (tracks.Count + tracks.Count); i++)
         {
             GameObject newTrack = Instantiate(tracks[i - tracks.Count]);
+            //newTrack.name = newTrack.name + i.ToString(); //Trocando o nome para melhor visualização
             iniciatedTracks.Add(newTrack.GetComponent<Module>());
             newTrack.SetActive(false);
+        }
+        if(distanceForRendering > 40 || tracksBeforePlayer > 5)
+        {
+            for (int i = (2*tracks.Count); i < (tracks.Count*3); i++)
+            {
+                GameObject newTrack = Instantiate(tracks[i - (2*tracks.Count)]);
+                iniciatedTracks.Add(newTrack.GetComponent<Module>());
+                newTrack.SetActive(false);
+            }
+
         }
 
         player = GameObject.FindWithTag("Player"); //Encontrando o player, pois podem ser modelos diferentes
 
         //trackTrick = GameObject.Instantiate(tracks[Random.Range(0,tracks.Count)], new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1.5f), player.transform.rotation);
         trackTrick = iniciatedTracks[Random.Range(0, iniciatedTracks.Count)];
-        trackTrick.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1.5f);
+        trackTrick.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1f);
         trackTrick.transform.rotation = player.transform.rotation;
         trackTrick.gameObject.SetActive(true);
 
@@ -66,7 +76,7 @@ public class GroundCreator : MonoBehaviour
             int i = 0;
             do
             {
-                i = Random.Range(0, tracks.Count);
+                i = Random.Range(0, iniciatedTracks.Count);
 
                 if (trackTrick != null)
                 {
@@ -80,9 +90,8 @@ public class GroundCreator : MonoBehaviour
                     }
 
                 }
-            } while (iniciatedTracks[i].Direction == forbidenDirection && iniciatedTracks[i].gameObject == renderedTracks.Any()); //Não cooque || aqui
-            //while (tracks[i].Direction == forbidenDirection);
-            Debug.Log(iniciatedTracks[i].name);
+            } while (iniciatedTracks[i].Direction == forbidenDirection || renderedTracks.Contains(iniciatedTracks[i]));
+
             associateNextTrackHere = renderedTracks[renderedTracks.Count - 1].End; //O track sempre tem de ser colocado após o ultimo renderizado. Lembrando que em C# as listas/vetores começam em 0
 
             //trackTrick = GameObject.Instantiate(tracks[i], associateNextTrackHere.transform.position, associateNextTrackHere.transform.rotation);
@@ -105,6 +114,7 @@ public class GroundCreator : MonoBehaviour
         if (PlayerRayCheck() != null && PlayerRayCheck() == renderedTracks[tracksBeforePlayer])
         {
             //GameObject.Destroy(renderedTracks[0].gameObject);
+
             renderedTracks[0].gameObject.SetActive(false);
             renderedTracks.RemoveAt(0);
 

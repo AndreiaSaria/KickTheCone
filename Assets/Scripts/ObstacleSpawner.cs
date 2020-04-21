@@ -9,12 +9,27 @@ public class ObstacleSpawner : MonoBehaviour
 {
     private List<GameObject> obstacles = new List<GameObject>();
     private BoxCollider colisor;
-    private int ChanceOfSpawn = 100;
+    private GameObject newObject;
+    private float chanceOfSpawn = 0.8f; //Essa chance de spawn pode ser ajustada deve ser um valor entre 0 e 1
+    private GameController controller1;
+    private GameControllerForAndroid controller2;
 
-    void OnEnable()
-    {
+    private void OnEnable() //Para quando o track for ativo fazer o spawn de objetos
+    {//https://answers.unity.com/questions/385639/how-to-spawn-prefabs-with-percent-random.html
 
-        var chancesBool = (Random.value < (ChanceOfSpawn/100)); //Valor em porcentagem, sendo 1 = 100%.
+        controller1 = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>(); //Se não achar esse controller então entrar para o de android
+        if(controller1 == null)
+        {
+            controller2 = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControllerForAndroid>();
+            chanceOfSpawn = controller2.ObstacleSpawnChance();
+        }
+        else
+        {
+            chanceOfSpawn = controller1.ObstacleSpawnChance();
+        }
+
+
+        var chancesBool = (Random.value <= chanceOfSpawn); //Valor em porcentagem
         if (chancesBool == true)
         {
             obstacles = FolderFinder.FindingObstacles();
@@ -22,9 +37,17 @@ public class ObstacleSpawner : MonoBehaviour
 
             SpawnObstacle();
         }
-        
+    }
+
+    private void OnDisable() //Para quando o track for desativado destruir o objeto anterior
+    {
+        if (newObject)
+        {
+            Destroy(newObject);
+        }
 
     }
+
 
     private void SpawnObstacle()
     {
@@ -35,7 +58,7 @@ public class ObstacleSpawner : MonoBehaviour
         Vector3 newPos = new Vector3(newX, colisor.bounds.max.y, newZ);  //Como o obstáculo irá ficar no topo da caixa, (y max)!!!
                                                                          //Provavelmente é necessário aplicar um offset se o pivot não estiver na base do objeto
         int i = Random.Range(0, obstacles.Count);
-        GameObject newObject = Instantiate(obstacles[i], newPos, transform.rotation, transform); // Aqui damos spawn no objeto escolhido na posição randomica, com a rotação identidade e o transform do objeto pai.
+        newObject = Instantiate(obstacles[i], newPos, transform.rotation, transform); // Aqui damos spawn no objeto escolhido na posição randomica, com a rotação identidade e o transform do objeto pai.
         int j = obstacles[i].layer;
         if (j == 13)
         {

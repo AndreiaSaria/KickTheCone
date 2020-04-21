@@ -24,7 +24,7 @@ public class StreetLightControl : MonoBehaviour
         {
             lightHere.enabled = control.LightSet(); //Conferir se é para estar ligado ou não
         }
-        
+
         //Lembro-me que não é muito bom enviar membros diretamente para outras classes, por isso fiz esta função. Um tipo de GETCOMPONENT.
     }
     
