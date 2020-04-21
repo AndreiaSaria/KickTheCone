@@ -2191,7 +2191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tracksBeforePlayer: 2
-  distanceForRendering: 40
+  distanceForRendering: 30
 --- !u!4 &1874503968
 Transform:
   m_ObjectHideFlags: 0

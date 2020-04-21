@@ -26,18 +26,19 @@ public class GroundCreatorAndroid : MonoBehaviour
     {
         
         tracks = FolderFinder.FindingTracksGameObject();//Coisa de gente preguiçosa (código para achar os tracks na pasta)
-        Debug.Log(tracks.Count);
+
         for (int i = 0; i < tracks.Count; i++)//Inicio 2x para ter pelo menos dois tracks de cada
-        {
-            Debug.Log(i);
-            iniciatedTracks[i] = Instantiate(tracks[i]).GetComponent<Module>();
-            iniciatedTracks[i].gameObject.SetActive(false);
+        {//Ajuste proposto pelo tutor, precisamos definir o tamanho do array se vamos fazer uma conferência de cada ponto do mesmo, logo ao invés de conferir cada ponto, vamos adicionar ao array sem definir index.
+            GameObject newTrack = Instantiate(tracks[i]);
+            iniciatedTracks.Add(newTrack.GetComponent<Module>());
+            newTrack.SetActive(false);
         }
 
         for (int i = tracks.Count; i < (tracks.Count + tracks.Count); i++)
         {
-            iniciatedTracks[i] = Instantiate(tracks[i - tracks.Count]).GetComponent<Module>();
-            iniciatedTracks[i].gameObject.SetActive(false);
+            GameObject newTrack = Instantiate(tracks[i - tracks.Count]);
+            iniciatedTracks.Add(newTrack.GetComponent<Module>());
+            newTrack.SetActive(false);
         }
 
         player = GameObject.FindWithTag("Player"); //Encontrando o player, pois podem ser modelos diferentes

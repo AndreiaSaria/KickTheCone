@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq; //Para Usar o Any, aprendido no código https://github.com/E-tutor-Pedro-Silva/2D-Level-Editor/blob/master/Assets/Scripts/Editor/LevelCreatorEditor.cs
 //using UnityEditor.AI; //Para NavmeshBuilder
 //Código refeito em 03/03/2020 com base no código Creator enviado pelo e-tutor. Atenção para raycast.
 //Código refeito novamente em 26/03/2020, aqui ajustamos o problema do raycast e retornamos o track em que ela toca para outro script
+//Código refeito novamente² em 21/04/2020 aqui fazemos object pooling para testar erros que andamos recebendo em android.
 
 public class GroundCreator : MonoBehaviour
 {
@@ -14,8 +16,9 @@ public class GroundCreator : MonoBehaviour
 
     //Module é um outro script que serve para nos ajudar dizendo a direção para onde os tracks vão, inclusive marcando o começo e o final do track.
 
-    private List<Module> tracks = new List<Module>();
+    private List<GameObject> tracks = new List<GameObject>();
     private List<Module> renderedTracks = new List<Module>(); //Não se esqueça de que caso o list seja private/protected fazer um iniciador!!!;
+    private List<Module> iniciatedTracks = new List<Module>();
     private Module trackTrick;
     private GameObject player; //Para a localização do player
     private Transform associateNextTrackHere; //Onde colocaremos o próximo track
@@ -24,11 +27,30 @@ public class GroundCreator : MonoBehaviour
     void Start()
     {
         
-        tracks = FolderFinder.FindingTracksModule();//Coisa de gente preguiçosa (código para achar os tracks na pasta)
+        tracks = FolderFinder.FindingTracksGameObject();//Coisa de gente preguiçosa (código para achar os tracks na pasta)
+
+        for (int i = 0; i < tracks.Count; i++)//Inicio 2x para ter pelo menos dois tracks de cada
+        {//Ajuste proposto pelo tutor, precisamos definir o tamanho do array se vamos fazer uma conferência de cada ponto do mesmo, logo ao invés de conferir cada ponto, vamos adicionar ao array sem definir index.
+            GameObject newTrack = Instantiate(tracks[i]);
+            iniciatedTracks.Add(newTrack.GetComponent<Module>());
+            newTrack.SetActive(false);
+        }
+
+        for (int i = tracks.Count; i < (tracks.Count + tracks.Count); i++)
+        {
+            GameObject newTrack = Instantiate(tracks[i - tracks.Count]);
+            iniciatedTracks.Add(newTrack.GetComponent<Module>());
+            newTrack.SetActive(false);
+        }
 
         player = GameObject.FindWithTag("Player"); //Encontrando o player, pois podem ser modelos diferentes
 
-        trackTrick = GameObject.Instantiate(tracks[Random.Range(0,tracks.Count)], new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1.5f), player.transform.rotation);
+        //trackTrick = GameObject.Instantiate(tracks[Random.Range(0,tracks.Count)], new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1.5f), player.transform.rotation);
+        trackTrick = iniciatedTracks[Random.Range(0, iniciatedTracks.Count)];
+        trackTrick.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1.5f);
+        trackTrick.transform.rotation = player.transform.rotation;
+        trackTrick.gameObject.SetActive(true);
+
 
         renderedTracks.Add(trackTrick);
         associateNextTrackHere = player.transform;
@@ -58,11 +80,19 @@ public class GroundCreator : MonoBehaviour
                     }
 
                 }
-            } while (tracks[i].Direction == forbidenDirection);
-
+            } while (iniciatedTracks[i].Direction == forbidenDirection && iniciatedTracks[i].gameObject == renderedTracks.Any()); //Não cooque || aqui
+            //while (tracks[i].Direction == forbidenDirection);
+            Debug.Log(iniciatedTracks[i].name);
             associateNextTrackHere = renderedTracks[renderedTracks.Count - 1].End; //O track sempre tem de ser colocado após o ultimo renderizado. Lembrando que em C# as listas/vetores começam em 0
 
-            trackTrick = GameObject.Instantiate(tracks[i], associateNextTrackHere.transform.position, associateNextTrackHere.transform.rotation);
+            //trackTrick = GameObject.Instantiate(tracks[i], associateNextTrackHere.transform.position, associateNextTrackHere.transform.rotation);
+            trackTrick = iniciatedTracks[i];
+            trackTrick.transform.position = associateNextTrackHere.transform.position;
+            trackTrick.transform.rotation = associateNextTrackHere.transform.rotation;
+            trackTrick.gameObject.SetActive(true);
+
+
+
             //if (mushroombuild)
             //{
             //    NavMeshBuilder.BuildNavMesh(); //ACTIVATE FOR MUSHROOM
@@ -74,8 +104,10 @@ public class GroundCreator : MonoBehaviour
 
         if (PlayerRayCheck() != null && PlayerRayCheck() == renderedTracks[tracksBeforePlayer])
         {
-            GameObject.Destroy(renderedTracks[0].gameObject);
+            //GameObject.Destroy(renderedTracks[0].gameObject);
+            renderedTracks[0].gameObject.SetActive(false);
             renderedTracks.RemoveAt(0);
+
         }
             //Código para caso queiramos pelo numero de tracks a renderizar
             //if (maxRenderedTracks == renderedTracks.Count)
