@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq; //Para Usar o Any, aprendido no código https://github.com/E-tutor-Pedro-Silva/2D-Level-Editor/blob/master/Assets/Scripts/Editor/LevelCreatorEditor.cs
 //Código refeito em 03/03/2020 com base no código Creator enviado pelo e-tutor. Atenção para raycast.
 //Código refeito novamente em 26/03/2020, aqui ajustamos o problema do raycast e retornamos o track em que ela toca para outro script
 //Código refeito novamente em 17/04/2020, iniciamos os objetos por object pooling.
@@ -26,25 +25,37 @@ public class GroundCreatorAndroid : MonoBehaviour
     {
         
         tracks = FolderFinder.FindingTracksGameObject();//Coisa de gente preguiçosa (código para achar os tracks na pasta)
-        Debug.Log(tracks.Count);
+
         for (int i = 0; i < tracks.Count; i++)//Inicio 2x para ter pelo menos dois tracks de cada
-        {
-            Debug.Log(i);
-            iniciatedTracks[i] = Instantiate(tracks[i]).GetComponent<Module>();
-            iniciatedTracks[i].gameObject.SetActive(false);
+        {//Ajuste proposto pelo tutor, precisamos definir o tamanho do array se vamos fazer uma conferência de cada ponto do mesmo, logo ao invés de conferir cada ponto, vamos adicionar ao array sem definir index.
+            GameObject newTrack = Instantiate(tracks[i]);
+            iniciatedTracks.Add(newTrack.GetComponent<Module>());
+            newTrack.SetActive(false);
         }
 
         for (int i = tracks.Count; i < (tracks.Count + tracks.Count); i++)
         {
-            iniciatedTracks[i] = Instantiate(tracks[i - tracks.Count]).GetComponent<Module>();
-            iniciatedTracks[i].gameObject.SetActive(false);
+            GameObject newTrack = Instantiate(tracks[i - tracks.Count]);
+            //newTrack.name = newTrack.name + i.ToString(); //Trocando o nome para melhor visualização
+            iniciatedTracks.Add(newTrack.GetComponent<Module>());
+            newTrack.SetActive(false);
+        }
+        if (distanceForRendering > 40 || tracksBeforePlayer > 5)
+        {
+            for (int i = (2 * tracks.Count); i < (tracks.Count * 3); i++)
+            {
+                GameObject newTrack = Instantiate(tracks[i - (2 * tracks.Count)]);
+                iniciatedTracks.Add(newTrack.GetComponent<Module>());
+                newTrack.SetActive(false);
+            }
+
         }
 
         player = GameObject.FindWithTag("Player"); //Encontrando o player, pois podem ser modelos diferentes
 
         //trackTrick = GameObject.Instantiate(tracks[Random.Range(0,tracks.Count)],new Vector3(player.transform.position.x,player.transform.position.y,player.transform.position.z -1.5f), player.transform.rotation);
         trackTrick = iniciatedTracks[Random.Range(0, iniciatedTracks.Count)];
-        trackTrick.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1.5f);
+        trackTrick.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - 1f);
         trackTrick.transform.rotation = player.transform.rotation;
         trackTrick.gameObject.SetActive(true);
 
@@ -78,7 +89,7 @@ public class GroundCreatorAndroid : MonoBehaviour
                     }
 
                 }
-            } while (iniciatedTracks[i].Direction == forbidenDirection && iniciatedTracks[i].gameObject == renderedTracks.Any()); //Aqui confere se está indo na direção proibida ou se ele já foi renderizado
+            } while (iniciatedTracks[i].Direction == forbidenDirection || renderedTracks.Contains(iniciatedTracks[i])); //Aqui confere se está indo na direção proibida ou se ele já foi renderizado
 
             associateNextTrackHere = renderedTracks[renderedTracks.Count - 1].End; //O track sempre tem de ser colocado após o ultimo renderizado. Lembrando que em C# as listas/vetores começam em 0
 

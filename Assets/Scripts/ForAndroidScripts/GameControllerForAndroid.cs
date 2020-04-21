@@ -45,6 +45,26 @@ public class GameControllerForAndroid : MonoBehaviour
         Falling();
     }
 
+    public float ObstacleSpawnChance() //chance de spawn em obstáculos, se o tempo de level load for menor do que 2 0% e assim por diante.
+    {
+        if (Time.timeSinceLevelLoad < 2)
+        {
+            return 0f;
+        }
+        else if (Time.timeSinceLevelLoad > 2 && Time.timeSinceLevelLoad < 5)
+        {
+            return 50f;
+        }
+        else if (Time.timeSinceLevelLoad > 5 && Time.timeSinceLevelLoad < 10)
+        {
+            return 70f;
+        }
+        else
+        {
+            return 84f;
+        }
+    }
+
     public void Falling() //O player decidiu voltar ao primeiro track renderizado e cair.
     {
         if (!fall && Mathf.Abs(player.GetComponent<Rigidbody>().worldCenterOfMass.y) > 4) //Aqui de novo sabemos que meus tracks se mantêm a uma certa altura, se cair além disso ela saiu do track; 

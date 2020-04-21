@@ -38,10 +38,31 @@ public class GameController : MonoBehaviour
             {
                 playerScript.forwardSpeed = playerScript.forwardSpeed + (Time.timeSinceLevelLoad / 100);
             }
+
         }
 
         WrongWay();
         Falling();
+    }
+
+    public float ObstacleSpawnChance() //chance de spawn em obstáculos, se o tempo de level load for menor do que 2 0% e assim por diante.
+    {
+        if (Time.timeSinceLevelLoad < 2)
+        {
+             return 0f;
+        }
+        else if (Time.timeSinceLevelLoad > 2 && Time.timeSinceLevelLoad < 5)
+        {
+            return 50f;
+        }
+        else if (Time.timeSinceLevelLoad > 5 && Time.timeSinceLevelLoad < 10)
+        {
+            return 70f;
+        }
+        else
+        {
+            return 84f;
+        }
     }
 
     public void Falling() //O player decidiu voltar ao primeiro track renderizado e cair.

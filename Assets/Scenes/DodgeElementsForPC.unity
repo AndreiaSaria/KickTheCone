@@ -1292,7 +1292,7 @@ GameObject:
   - component: {fileID: 1290234096}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1631,7 +1631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tracksBeforePlayer: 3
-  distanceForRendering: 50
+  distanceForRendering: 35
   mushroombuild: 0
 --- !u!4 &1709592656
 Transform:
