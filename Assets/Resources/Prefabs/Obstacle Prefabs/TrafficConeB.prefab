@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 865327121406954701}
   - component: {fileID: 6818425858155313917}
   - component: {fileID: 7795912779414324478}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TrafficConeB
-  m_TagString: Untagged
+  m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

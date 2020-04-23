@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialAndroid.unity
     guid: 8eb6ccb7b0a67a04e912291e62ae1ea4
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 6083b7c57eaf8ad4f9a36368d1584526,
+      type: 2}

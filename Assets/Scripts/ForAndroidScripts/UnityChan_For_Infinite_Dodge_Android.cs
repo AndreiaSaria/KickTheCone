@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 //Todos os movimentos de física tem de estar no FIXEDUPDATE. Assim evitamos erros por mudança de framerate
 
 namespace UnityChanForAndroid
@@ -169,11 +169,17 @@ namespace UnityChanForAndroid
                             vec.z = Mathf.Round(vec.z / 90) * 90;
                             transform.eulerAngles = vec;
                         }
-                        
+
                         break;
                 }
             }
         }
+
+        private void AndroidTouchesNewInput()
+        {
+            
+        }
+
 
         private void Slide()
         {

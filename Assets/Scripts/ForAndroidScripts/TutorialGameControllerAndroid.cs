@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityChanForAndroid;
-using UnityEngine.UI;
+//using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 
@@ -35,7 +36,7 @@ public class TutorialGameControllerAndroid : MonoBehaviour
     public GameObject pauseButton;
     public GameObject gameOverMenu;
     public AudioClip[] inGameMusic;
-    public Text coneKick;
+    public TMP_Text coneKick;
 
 
     void Start()

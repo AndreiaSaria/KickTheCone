@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro; //Para usar Text mesh pro, ATENÇÃO PARA A BESTA QUADRADA QUE SOU: QUANDO USAR O ARQUIVO DE ASSEMBLY REFECENCE SEMPRE COLOCAR OS NOVOS PACKAGES REFERENCES NELE!!!
 
 //Sei que poderia ter colocado as strings em um vetor String[] e controlado um random dentro do mesmo. Mas, bem, fiz assim.
 
@@ -12,8 +12,8 @@ public class GameMenuManagerAndroid : MonoBehaviour
     public GameObject endGameMenu;
     public GameObject pauseButton;
     public AudioClip[] inGameMusic;
-    public Text youLoseOrWin;
-    public Text coneKick;
+    public TMP_Text youLoseOrWin;
+    public TMP_Text coneKick;
     private AudioSource audioSource;
     private int score;
     private Coroutine theCoroutine; //Para ter certeza de estar chamando a mesma coroutine ao invés de instances do mesmo
