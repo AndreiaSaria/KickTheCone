@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro; //Para usar Text mesh pro, ATENÇÃO PARA A BESTA QUADRADA QUE SOU: QUANDO USAR O ARQUIVO DE ASSEMBLY REFECENCE SEMPRE COLOCAR OS NOVOS PACKAGES REFERENCES NELE!!!
 
 //Sei que poderia ter colocado as strings em um vetor String[] e controlado um random dentro do mesmo. Mas, bem, fiz assim.
 
@@ -10,9 +10,10 @@ public class GameMenuManagerPC : MonoBehaviour
 {
     public GameObject canvas; //Foi aqui que coloquei a música ingame
     public GameObject endGameMenu;
+    public GameObject pauseButton;
     public AudioClip[] inGameMusic;
-    public Text youLoseOrWin;
-    public Text coneKick;
+    public TMP_Text youLoseOrWin;
+    public TMP_Text coneKick;
     private AudioSource audioSource;
     private int score;
     private Coroutine theCoroutine; //Para ter certeza de estar chamando a mesma coroutine ao invés de instances do mesmo
@@ -231,6 +232,23 @@ public class GameMenuManagerPC : MonoBehaviour
 
     }
 
+    public void ThePause()
+    {
+        if (Time.timeScale != 0)
+        {
+            endGameMenu.SetActive(true);
+            youLoseOrWin.text = "";
+            Time.timeScale = 0;
+            Score(5);
+        }
+        else
+        {
+            endGameMenu.SetActive(false);
+            Time.timeScale = 1;
+            Score(1);
+        }
+    }
+
     void Update()
     {
         if (Input.GetButtonDown("Cancel")) //Se apertar esc
@@ -243,16 +261,7 @@ public class GameMenuManagerPC : MonoBehaviour
 
         if (Input.GetButtonDown("Pause")) //Entrada do pause.
         {
-            if(Time.timeScale != 0)
-            {
-                Time.timeScale = 0;
-                Score(5);
-            }
-            else
-            {
-                Time.timeScale = 1;
-                Score(1);
-            }
+            ThePause();
             
         }
     }

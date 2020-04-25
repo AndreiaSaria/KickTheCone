@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 //Todos os movimentos de física tem de estar no FIXEDUPDATE. Assim evitamos erros por mudança de framerate
 
 namespace UnityChanForAndroid
@@ -40,11 +39,13 @@ namespace UnityChanForAndroid
         static int idleState = Animator.StringToHash("Base Layer.Idle");
         static int locoState = Animator.StringToHash("Base Layer.Locomotion");
         static int jumpState = Animator.StringToHash("Base Layer.Jump");
+        static int inAir = Animator.StringToHash("Base Layer.InAir");
 
 
 
         void Start()
         {
+
             slide = false;
             jump = false;
 
@@ -175,11 +176,6 @@ namespace UnityChanForAndroid
             }
         }
 
-        private void AndroidTouchesNewInput()
-        {
-            
-        }
-
 
         private void Slide()
         {
@@ -190,6 +186,10 @@ namespace UnityChanForAndroid
                 {//Se estiver no estado de locomoção ou no estado de pular
                     anim.SetBool("Slide", true); //Deslizar
                 }
+            else if(anim.GetCurrentAnimatorStateInfo(0).fullPathHash == inAir) //Se ela estiver no ar> empurrar para baixo.
+            {
+                transform.position = new Vector3(transform.position.x, 0.40f, transform.position.z);
+            }
             //}
 
             if (anim.GetCurrentAnimatorStateInfo(0).fullPathHash == slideState)
