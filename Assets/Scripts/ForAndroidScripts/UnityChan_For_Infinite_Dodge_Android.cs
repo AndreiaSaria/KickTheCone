@@ -186,10 +186,6 @@ namespace UnityChanForAndroid
                 {//Se estiver no estado de locomoção ou no estado de pular
                     anim.SetBool("Slide", true); //Deslizar
                 }
-            else if(anim.GetCurrentAnimatorStateInfo(0).fullPathHash == inAir) //Se ela estiver no ar> empurrar para baixo.
-            {
-                transform.position = new Vector3(transform.position.x, 0.40f, transform.position.z);
-            }
             //}
 
             if (anim.GetCurrentAnimatorStateInfo(0).fullPathHash == slideState)
