@@ -7789,6 +7789,8 @@ MonoBehaviour:
   jumpPower: 30
   foot: {fileID: 3593069702665211822}
   gameController: {fileID: 0}
+  dustParticle: {fileID: 1446038445977040952, guid: 6edc259e0f5fee64a86a4ca1b7a3fdea,
+    type: 3}
 --- !u!114 &6623228529452190448
 MonoBehaviour:
   m_ObjectHideFlags: 0
