@@ -440,8 +440,8 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 766a6ccfd4eb9834e9e9cc176673b246, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 1
+  m_InitialState: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
