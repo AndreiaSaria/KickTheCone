@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //using UnityEditor.AI; //Para NavmeshBuilder
@@ -111,14 +111,18 @@ public class GroundCreator : MonoBehaviour
             renderedTracks.Add(trackTrick); //Adicionando ao manager de tracks
         }
 
-        if (PlayerRayCheck() != null && PlayerRayCheck() == renderedTracks[tracksBeforePlayer])
+        if (renderedTracks.Count >= tracksBeforePlayer)
         {
-            //GameObject.Destroy(renderedTracks[0].gameObject);
+            if (PlayerRayCheck() != null && PlayerRayCheck() == renderedTracks[tracksBeforePlayer])
+            {
+                //GameObject.Destroy(renderedTracks[0].gameObject);
 
-            renderedTracks[0].gameObject.SetActive(false);
-            renderedTracks.RemoveAt(0);
+                renderedTracks[0].gameObject.SetActive(false);
+                renderedTracks.RemoveAt(0);
 
+            }
         }
+
             //Código para caso queiramos pelo numero de tracks a renderizar
             //if (maxRenderedTracks == renderedTracks.Count)
             //{
