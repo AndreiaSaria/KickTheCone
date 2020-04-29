@@ -797,6 +797,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptimizedTree
       objectReference: {fileID: 0}
+    - target: {fileID: 8636742262774033010, guid: 0d0433d1f41d7de49ba3a11bf696032b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 030042c3b4ba2494486328be881e449a, type: 2}
+    - target: {fileID: 8636742262774033010, guid: 0d0433d1f41d7de49ba3a11bf696032b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636742262774033010, guid: 0d0433d1f41d7de49ba3a11bf696032b,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d0433d1f41d7de49ba3a11bf696032b, type: 3}
 --- !u!4 &9018291046903233383 stripped
