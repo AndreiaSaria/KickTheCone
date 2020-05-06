@@ -102,7 +102,7 @@ public class GroundCreatorAndroid : MonoBehaviour
             renderedTracks.Add(trackTrick); //Adicionando ao manager de tracks
         }
 
-        if (PlayerRayCheck() != null && PlayerRayCheck() == renderedTracks[tracksBeforePlayer])
+        if (PlayerRayCheck() != null && PlayerRayCheck() == renderedTracks[tracksBeforePlayer - 1])
         {
             //GameObject.Destroy(renderedTracks[0].gameObject);
             renderedTracks[0].gameObject.SetActive(false);

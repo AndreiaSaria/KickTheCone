@@ -113,7 +113,7 @@ public class GroundCreator : MonoBehaviour
 
         if (renderedTracks.Count >= tracksBeforePlayer)
         {
-            if (PlayerRayCheck() != null && PlayerRayCheck() == renderedTracks[tracksBeforePlayer])
+            if (PlayerRayCheck() != null && PlayerRayCheck() == renderedTracks[tracksBeforePlayer - 1])
             {
                 //GameObject.Destroy(renderedTracks[0].gameObject);
 
