@@ -4794,9 +4794,10 @@ GameObject:
   - component: {fileID: 4878376831103383483}
   - component: {fileID: 6230245800714350637}
   - component: {fileID: 5714793190061746337}
+  - component: {fileID: 4660076541232238077}
   m_Layer: 0
   m_Name: Tree_Stylized
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4824,7 +4825,7 @@ Tree:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3377716568435186732}
   m_SpeedTreeWindAsset: {fileID: 0}
-  m_TreeData: {fileID: -4163460815027188713, guid: c3c0c9c50fb3e88429f35ee998c41b60,
+  m_TreeData: {fileID: -4163460815027188713, guid: 8916b04e0ebee204499ecc3dcb687864,
     type: 3}
 --- !u!33 &6230245800714350637
 MeshFilter:
@@ -4833,7 +4834,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3377716568435186732}
-  m_Mesh: {fileID: -3606643792631882657, guid: c3c0c9c50fb3e88429f35ee998c41b60, type: 3}
+  m_Mesh: {fileID: -3606643792631882657, guid: 1b061618998d7f04e8e0679717dc1540, type: 3}
 --- !u!23 &5714793190061746337
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4852,8 +4853,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2773579266343705501, guid: c3c0c9c50fb3e88429f35ee998c41b60, type: 3}
-  - {fileID: 3857757088118694798, guid: c3c0c9c50fb3e88429f35ee998c41b60, type: 3}
+  - {fileID: 2773579266343705501, guid: 8916b04e0ebee204499ecc3dcb687864, type: 3}
+  - {fileID: 3857757088118694798, guid: 8916b04e0ebee204499ecc3dcb687864, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4874,3 +4875,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4660076541232238077
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3377716568435186732}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 7.37, z: 1.31}
+  m_Center: {x: 0.1, y: 4.044759, z: -0.22}

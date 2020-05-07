@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3377716568435186732, guid: d7cc77bf87ab6bc4b933c21145d12979,
         type: 3}
       propertyPath: m_Name
-      value: Tree_Stylized
+      value: Tree_Stylized_9
       objectReference: {fileID: 0}
     - target: {fileID: 4359825599764547836, guid: d7cc77bf87ab6bc4b933c21145d12979,
         type: 3}
@@ -82,11 +82,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 3857757088118694798}
-    - target: {fileID: 5714793190061746337, guid: d7cc77bf87ab6bc4b933c21145d12979,
-        type: 3}
-      propertyPath: m_SelectedEditorRenderState
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6230245800714350637, guid: d7cc77bf87ab6bc4b933c21145d12979,
         type: 3}
       propertyPath: m_Mesh
