@@ -1559,7 +1559,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 49f079415df41974dbb3f96c3d01e911, type: 3}
+    - sprite: {fileID: 21300000, guid: 3bf34220a0202784b83161bb402c7796, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4825,7 +4825,7 @@ Tree:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3377716568435186732}
   m_SpeedTreeWindAsset: {fileID: 0}
-  m_TreeData: {fileID: -4163460815027188713, guid: 8916b04e0ebee204499ecc3dcb687864,
+  m_TreeData: {fileID: -4163460815027188713, guid: 1b061618998d7f04e8e0679717dc1540,
     type: 3}
 --- !u!33 &6230245800714350637
 MeshFilter:
@@ -4853,8 +4853,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2773579266343705501, guid: 8916b04e0ebee204499ecc3dcb687864, type: 3}
-  - {fileID: 3857757088118694798, guid: 8916b04e0ebee204499ecc3dcb687864, type: 3}
+  - {fileID: 2773579266343705501, guid: 1b061618998d7f04e8e0679717dc1540, type: 3}
+  - {fileID: 3857757088118694798, guid: 1b061618998d7f04e8e0679717dc1540, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4867,7 +4867,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
