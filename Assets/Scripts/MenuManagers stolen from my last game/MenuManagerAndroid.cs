@@ -39,7 +39,7 @@ public class MenuManagerAndroid : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(3); //aqui chama a cutscene que ao seu final chama o tutorial
+            SceneManager.LoadScene(2); //aqui chama a cutscene se estiver em 3 que ao seu final chama o tutorial
         }
 
     }
