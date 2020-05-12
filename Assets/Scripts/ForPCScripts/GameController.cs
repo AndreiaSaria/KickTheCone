@@ -67,7 +67,10 @@ public class GameController : MonoBehaviour
 
     public void Falling() //O player decidiu voltar ao primeiro track renderizado e cair.
     {
-        if (!fall && Mathf.Abs(player.GetComponent<Rigidbody>().worldCenterOfMass.y) > 4) //Aqui de novo sabemos que meus tracks se mantêm a uma certa altura, se cair além disso ela saiu do track; 
+        //if(!fall && (player.GetComponent<Rigidbody>().worldCenterOfMass.y < -4)) //Aqui de novo sabemos que meus tracks se mantêm a uma certa altura, se cair além disso ela saiu do track; 
+        //if (!fall && Mathf.Abs(player.GetComponent<Rigidbody>().worldCenterOfMass.y) > 4) // Aqui se ela subir demais acaba o game também
+
+        if(player.transform.position.y < -8 && !fall) //Aqui de novo sabemos que meus tracks se mantêm a uma certa altura, se cair além disso ela saiu do track; 
         {
             //Debug.Log("Looks like you fell a rabbit hole huh");
             menu.SetActivity(4);
